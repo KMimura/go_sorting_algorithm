@@ -19,12 +19,14 @@ func quickSort(slice []int, c chan []int) {
 	rootVal := slice[0]
 	var ltRoot []int
 	var gtRoot []int
+	var saRoot []int
 	for _, a := range slice {
 		if a < rootVal {
 			ltRoot = append(ltRoot, a)
-		}
-		if a > rootVal {
+		} else if a > rootVal {
 			gtRoot = append(gtRoot, a)
+		} else if a == rootVal {
+			saRoot = append(saRoot, a)
 		}
 	}
 
@@ -37,7 +39,7 @@ func quickSort(slice []int, c chan []int) {
 	ltRootSorted := <-ltChan
 	gtRootSorted := <-gtChan
 
-	ltRootSorted = append(ltRootSorted, rootVal)
+	ltRootSorted = append(ltRootSorted, saRoot...)
 	returnVal := append(ltRootSorted, gtRootSorted...)
 	c <- returnVal
 	close(c)
