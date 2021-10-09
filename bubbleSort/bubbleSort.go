@@ -9,7 +9,6 @@ func main() {
 }
 
 func bubbleSort(slice []int) []int {
-	fmt.Println(len(slice))
 	for i := len(slice) - 1; i >= 1; i-- {
 		if slice[i-1] > slice[i] {
 			slice[i-1], slice[i] = slice[i], slice[i-1]
