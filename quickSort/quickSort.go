@@ -4,12 +4,17 @@ import "fmt"
 
 func main() {
 	testVal := []int{5, 1, 0, 8, 2, 7, 4, 3, 9, 6}
-	fmt.Println(quickSort(testVal))
+	sortChan := make(chan []int)
+	go quickSort(testVal, sortChan)
+	resultVal := <-sortChan
+	fmt.Println(resultVal)
 }
 
-func quickSort(slice []int) []int {
+func quickSort(slice []int, c chan []int) {
 	if len(slice) <= 1 {
-		return slice
+		c <- slice
+		close(c)
+		return
 	}
 	rootVal := slice[0]
 	var ltRoot []int
@@ -22,12 +27,18 @@ func quickSort(slice []int) []int {
 			gtRoot = append(gtRoot, a)
 		}
 	}
-	var ltRootSorted []int
-	var gtRootSorted []int
 
-	ltRootSorted = quickSort(ltRoot)
-	gtRootSorted = quickSort(gtRoot)
+	ltChan := make(chan []int)
+	gtChan := make(chan []int)
+
+	go quickSort(ltRoot, ltChan)
+	go quickSort(gtRoot, gtChan)
+
+	ltRootSorted := <-ltChan
+	gtRootSorted := <-gtChan
+
 	ltRootSorted = append(ltRootSorted, rootVal)
 	returnVal := append(ltRootSorted, gtRootSorted...)
-	return returnVal
+	c <- returnVal
+	close(c)
 }
