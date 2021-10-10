@@ -17,8 +17,11 @@ func quickSort(slice []int, c chan []int) {
 		return
 	}
 	rootVal := slice[0]
+	// less than
 	var ltRoot []int
+	// greater than
 	var gtRoot []int
+	// same as
 	var saRoot []int
 	for _, a := range slice {
 		if a < rootVal {
