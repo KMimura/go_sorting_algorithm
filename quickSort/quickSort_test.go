@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -18,10 +17,7 @@ func TestQuickSort1(t *testing.T) {
 		}
 	}
 	if testFailureFlg {
-		fmt.Println("test failed")
-		fmt.Println(result)
-	} else {
-		fmt.Println("test success")
+		t.Fatalf("test1 failed")
 	}
 }
 
@@ -38,9 +34,6 @@ func TestQuickSort2(t *testing.T) {
 		}
 	}
 	if testFailureFlg {
-		fmt.Println("test failed")
-		fmt.Println(result)
-	} else {
-		fmt.Println("test success")
+		t.Fatalf("test1 failed")
 	}
 }
