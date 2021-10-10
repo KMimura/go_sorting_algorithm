@@ -16,7 +16,7 @@ func bubbleSort(slice []int, c chan []int) {
 			slice[i-1], slice[i] = slice[i], slice[i-1]
 		}
 	}
-	if len(slice) > 0 {
+	if len(slice) > 1 {
 		sortChan := make(chan []int)
 		go bubbleSort(slice[1:], sortChan)
 		sortedSlice := <-sortChan
