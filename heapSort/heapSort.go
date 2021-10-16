@@ -11,7 +11,9 @@ type node struct {
 func main() {
 	testVal := []int{5, 4, 7, 3, 0, 9, 2, 1, 8, 6}
 	nodes := createNodes(testVal)
-	fmt.Println(nodes)
+	var sortedVal []int
+	sortedVal = heapSort(nodes[0], sortedVal)
+	fmt.Println(sortedVal)
 }
 
 func createNodes(slice []int) []*node {
@@ -55,5 +57,18 @@ func appendNode(nodeCreated *node, parentNode *node) {
 			appendNode(nodeCreated, parentNode.rightNode)
 		}
 	}
+}
 
+func heapSort(nodeVal *node, sortedSlice []int) []int {
+	fmt.Println(nodeVal.value)
+	if nodeVal.leftNode != nil {
+		sortedSlice = heapSort(nodeVal.leftNode, sortedSlice)
+		sortedSlice = append(sortedSlice, nodeVal.value)
+	} else {
+		sortedSlice = append(sortedSlice, nodeVal.value)
+	}
+	if nodeVal.rightNode != nil {
+		sortedSlice = heapSort(nodeVal.rightNode, sortedSlice)
+	}
+	return sortedSlice
 }
