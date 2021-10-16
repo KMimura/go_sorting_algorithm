@@ -60,7 +60,6 @@ func appendNode(nodeCreated *node, parentNode *node) {
 }
 
 func heapSort(nodeVal *node, sortedSlice []int) []int {
-	fmt.Println(nodeVal.value)
 	if nodeVal.leftNode != nil {
 		sortedSlice = heapSort(nodeVal.leftNode, sortedSlice)
 		sortedSlice = append(sortedSlice, nodeVal.value)
