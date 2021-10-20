@@ -34,6 +34,23 @@ func TestSelectionSort2(t *testing.T) {
 		}
 	}
 	if testFailureFlg {
-		t.Fatalf("test1 failed")
+		t.Fatalf("test2 failed")
+	}
+}
+
+func TestSelectionSort3(t *testing.T) {
+	testCase := []int{0}
+	sortChan := make(chan []int)
+	go selectionSort(testCase, sortChan)
+	result := <-sortChan
+	testFailureFlg := false
+	expectedResult := []int{0}
+	for i, e := range expectedResult {
+		if result[i] != e {
+			testFailureFlg = true
+		}
+	}
+	if testFailureFlg {
+		t.Fatalf("test3 failed")
 	}
 }
