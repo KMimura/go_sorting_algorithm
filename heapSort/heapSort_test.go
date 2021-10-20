@@ -34,6 +34,23 @@ func TestHeapSort2(t *testing.T) {
 		}
 	}
 	if testFailureFlg {
-		t.Fatalf("test1 failed")
+		t.Fatalf("test2 failed")
+	}
+}
+
+func TestHeapSort3(t *testing.T) {
+	testCase := []int{0}
+	nodes := createNodes(testCase)
+	var result []int
+	result = heapSort(nodes[0], result)
+	testFailureFlg := false
+	expectedResult := []int{0}
+	for i, e := range expectedResult {
+		if result[i] != e {
+			testFailureFlg = true
+		}
+	}
+	if testFailureFlg {
+		t.Fatalf("test3 failed")
 	}
 }
